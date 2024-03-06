@@ -1,0 +1,30 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#header-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid 2px #C89B3C;
+}
+
+#logo {
+    width: 200px;
+    height: auto;
+}
+
+#LOLGRAM {
+    width: 200px;
+    height: auto;
+}
+
+body {
+    color: black;
+    background-image: linear-gradient(to bottom, #0A323C, #010A14);
+}
