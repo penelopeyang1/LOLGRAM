@@ -12,19 +12,38 @@ body {
     justify-content: flex-start;
     align-items: center;
     border-bottom: solid 2px #C89B3C;
+    /* margin-bottom: 50px; */
 }
 
 #logo {
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 
 #LOLGRAM {
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 
 body {
-    color: black;
-    background-image: linear-gradient(to bottom, #0A323C, #010A14);
+    background: radial-gradient(circle, #0A323C, #010A14);
+    background-size: cover;
+}
+
+#loading-screen-container {
+    height: 100vh;
+    /* Set container height to viewport height */
+    display: flex;
+    /* Set display to flex to align items */
+    flex-wrap: wrap;
+    /* Enable wrapping of items */
+    justify-content: center;
+    /* Center align items horizontally */
+    align-items: flex-start;
+    /* Align items to the top */
+}
+
+#loading-screen-container img {
+    margin: 200px;
+    /* Add space between images */
 }
