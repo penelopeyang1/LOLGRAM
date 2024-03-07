@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+main{
+    text-align: center;
+}
+
 #header-container {
     width: 100%;
     height: auto;
@@ -44,6 +48,58 @@ body {
 }
 
 #loading-screen-container img {
-    margin: 200px;
+    /* margin: 200px; */
+    /* margin: 50px; */
     /* Add space between images */
+}
+
+/* Define the border image */
+.border-image {
+    /* border: 50px solid transparent; */
+    /* Set the initial border to transparent */
+    border-image-source: url('border.png');
+    /* Specify the URL of the border image */
+    border-image-slice: fill;
+    /* Adjust the border image slice if needed */
+}
+
+/* Apply the border to all images */
+.splash {
+    /* Apply the border image to all images */
+    border-image: url('border.png') 20 fill repeat;
+    /* Set the border width */
+    border-width: 10px;
+    /* Set the border style */
+    border-style: solid;
+    width: auto;
+        /* Adjust the width as needed */
+    height: auto;
+    object-fit: cover;
+        /* Adjust the height as needed */
+    z-index: 1;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 50px;
+    width: auto;
+    height: auto;
+}
+
+.text-overlay {
+    width: 80%;
+    height: 30px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+    line-height: 10px;
+    margin-bottom: 20px;
 }
