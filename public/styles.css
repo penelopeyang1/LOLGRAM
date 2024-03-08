@@ -7,6 +7,16 @@ body {
     background-size: auto;
 }
 
+
+@font-face {
+    font-family: 'lol-font' ;
+    src: url('Friz-Quadrata-Regular.ttf');
+}
+
+* {
+    font-family: 'lol-font';
+}
+
 main{
     text-align: center;
 }
@@ -15,20 +25,26 @@ main{
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+
     align-items: center;
     border-bottom: solid 2px #C89B3C;
     /* margin-bottom: 50px; */
+    flex-direction: column;
+
 }
 
 #logo {
     width: 150px;
     height: auto;
+    margin-top: 15px;
 }
 
 #LOLGRAM {
     width: 150px;
     height: auto;
+    margin-bottom: -20px;
+    margin-top: -25px;
 }
 
 /* body {
@@ -79,7 +95,15 @@ main{
     object-fit: cover;
         /* Adjust the height as needed */
     z-index: 1;
+    /* border: transparent; */
 }
+
+.splash:hover{
+box-shadow: 0px 0px 24px 12px rgba(235, 217, 51, 0.75);
+    -webkit-box-shadow: 0px 0px 24px 12px rgba(235, 217, 51, 0.75);
+    -moz-box-shadow: 0px 0px 24px 12px rgba(235, 217, 51, 0.75);
+}
+
 
 .image-container {
     position: relative;
