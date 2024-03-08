@@ -139,64 +139,49 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             // Create a container for holding comments (both pre-made and newly made)
             const commentsBox = document.createElement('div');
             commentsBox.classList.add('comments-box');
-            console.log(commentsBox)
-
-            async function fetchRandomUsername() {
-                try {
-                    const response = await fetch('https://randomuser.me/api/');
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch random username');
-                    }
-                    const data = await response.json();
-                    const username = data.results[0].login.username;
-                    return username;
-                } catch (error) {
-                    console.error('Error fetching random username:', error);
-                }
-            }
-
-            async function fetchRandomComment() {
-                try {
-                    const response = await fetch('https://dummyjson.com/comments');
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch random comment');
-                    }
-                    const data = await response.json();
-                    const comment = data[Math.floor(Math.random() * data.length)];
-                    return comment;
-                } catch (error) {
-                    console.error('Error fetching random comment:', error);
-                }
-            }
-
-            async function displayRandomComments(commentBox) {
-                try {
-                    const numComments = Math.floor(Math.random() * 11); // Random number of comments between 0 and 10
-                    for (let i = 0; i < numComments; i++) {
-                        const username = await fetchRandomUsername();
-                        const comment = await fetchRandomComment();
-                        const commentElement = document.createElement('div');
-                        commentElement.textContent = `${username}: ${comment}`;
-                        commentBox.appendChild(commentElement);
-                    }
-                } catch (error) {
-                    console.error('Error displaying random comments:', error);
-                }
-            }
+            // console.log(commentsBox)
 
             // Usage
-            const commentBoxes = document.querySelectorAll('.comments-box');
-            commentBoxes.forEach(commentBox => displayRandomComments(commentBox));
+            // const commentBoxes = document.querySelectorAll('.comments-box');
+            // commentBoxes.forEach(commentBox => displayRandomComments(commentBox));
 
+            // Function to create a comment element
+            function createCommentElement(commentText) {
+                const comment = document.createElement('div');
+                comment.textContent = commentText; // Set the text content of the comment
+                comment.classList.add('comment'); // Add class for styling
+                return comment;
+            }
 
             // Event listener for the comment button
+            // commentButton.addEventListener('click', () => {
+            //     // Get the value of the comment input
+            //     const commentText = commentInput.value.trim();
+            //     if (commentText.trim() !== '') {
+            //         // Create a new comment element
+            //         const comment = document.createElement('div');
+            //         comment.textContent = commentText;
+            //         comment.classList.add('comment'); // Add class for styling
+
+            //         // Append the comment to the comments box
+            //         commentsBox.appendChild(comment);
+
+            //         // Clear the comment input field
+            //         commentInput.value = '';
+            //     }
+            // });
+
+            //event listener for having guest username included with comment
             commentButton.addEventListener('click', () => {
                 // Get the value of the comment input
-                const commentText = commentInput.value;
+                const commentText = commentInput.value.trim();
                 if (commentText.trim() !== '') {
-                    // Create a new comment element
+                    // Assuming you have a variable for the username, replace 'Guest_User' with your actual username variable
+                    const username = 'Guest_User';
+
+                    // Create a new comment element with the username and comment text
                     const comment = document.createElement('div');
-                    comment.textContent = commentText;
+                    comment.textContent = `${username}: ${commentText}`; // Concatenate username with comment text
                     comment.classList.add('comment'); // Add class for styling
 
                     // Append the comment to the comments box

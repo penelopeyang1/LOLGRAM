@@ -3,6 +3,8 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background: radial-gradient(circle, #0A323C, #010A14);
+    background-size: auto;
 }
 
 main{
@@ -29,10 +31,10 @@ main{
     height: auto;
 }
 
-body {
+/* body {
     background: radial-gradient(circle, #0A323C, #010A14);
-    background-size: cover;
-}
+    background-size: auto;
+} */
 
 #loading-screen-container {
     height: 100vh;
@@ -121,6 +123,8 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    justify-content: start;
+    /* display: flex;
+    justify-content: flex-start;
+    flex-direction: column; */
+    text-align: start;
 }
