@@ -153,6 +153,10 @@ box-shadow: 0px 0px 24px 12px rgba(235, 217, 51, 0.75);
     text-align: start;
 }
 
+.comment {
+    margin: 4px;
+}
+
 .like-container{
     display: flex;
     align-items: center;
