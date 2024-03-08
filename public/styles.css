@@ -103,7 +103,7 @@ main{
     box-sizing: border-box;
     z-index: 1;
     line-height: 20px;
-    margin-bottom: 63px;
+    margin-bottom: 95px;
     display: inline-block;
 }
 
@@ -116,7 +116,7 @@ main{
     height: 50px;
     overflow: auto;
     /* Add scrollbar when content overflows */
-    border: 1px solid #ccc;
+    border: 1px solid #C89B3C;
     color: white;
     padding: 5px;
     /* Optional: Add padding for spacing */
@@ -127,4 +127,41 @@ main{
     justify-content: flex-start;
     flex-direction: column; */
     text-align: start;
+}
+
+.like-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -10px;
+    margin-top: -15px;
+}
+.like-button {
+    background: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: none;
+}
+
+.comment-button {
+    cursor: pointer;
+}
+
+.like-count {
+    margin-left: -25px;
+}
+
+.comment-input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #C89B3C ;
+    outline: none;
+    margin-right: 10px;
+}
+
+.comment-container {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
 }

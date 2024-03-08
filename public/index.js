@@ -71,7 +71,6 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
                 }
             }
         }
-
         // Shuffle the array of all skins
         const shuffledSkins = shuffleArray(allSkins);
 
@@ -104,7 +103,7 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
 
             // Create a like button
             const likeButton = document.createElement('button');
-            likeButton.textContent = 'Like';
+            // likeButton.textContent = 'Like';
             likeButton.classList.add('like-button');
 
             // Create a like count span
@@ -114,12 +113,70 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             likeCount.textContent = initialLikes;
             likeCount.classList.add('like-count');
 
-            // Event listener for the like button
+            const image = document.createElement('img');
+            image.src = 'yellow-heart.png'; // Set the initial image source
+            image.alt = 'Button'; // Set the alt attribute
+
+            image.style.width = '60px'; // Set the width of the image
+            image.style.height = '90px'; // Set the height of the image
+
+            // // Append the image to the button
+            likeButton.appendChild(image);
+
+            // Boolean variable to track the state of the button
+            let isClicked = false;
+
+            // Event listener for the button click with color transtion but non-working count transition
+            // likeButton.addEventListener('click', () => {
+            //     // Toggle the state of the button
+            //     isClicked = !isClicked;
+
+            //     // Change the image source based on the state
+            //     if (isClicked) {
+            //         const currentCount = parseInt(likeCount.textContent);
+            //         likeCount.textContent = currentCount + 1;
+            //         image.src = 'color-heart.png'; // Set the new image source
+            //     } else if (isClicked && image.src === 'color-heart.png') {
+            //         const currentCount = parseInt(likeCount.textContent);
+            //         likeCount.textContent = currentCount - 1;
+            //         image.src = 'white-heart.png';
+            //     } else {
+            //         image.src = 'white-heart.png'; // Set the initial image source
+            //     }
+            // });
+
+            let previousState = false;
+
+            // Event listener for the button click
             likeButton.addEventListener('click', () => {
-                // Increment the like count when the button is clicked
-                const currentCount = parseInt(likeCount.textContent);
-                likeCount.textContent = currentCount + 1;
+                // Toggle the state of the button
+                isClicked = !isClicked;
+
+                // Change the image source based on the state
+                if (isClicked) {
+                    image.src = 'color-heart.png'; // Set the new image source
+                    if (!previousState) {
+                        const currentCount = parseInt(likeCount.textContent);
+                        likeCount.textContent = currentCount + 1;
+                    }
+                } else {
+                    image.src = 'yellow-heart.png'; // Set the initial image source
+                    if (previousState) {
+                        const currentCount = parseInt(likeCount.textContent);
+                        likeCount.textContent = currentCount - 1;
+                    }
+                }
+
+                // Update previous state
+                previousState = isClicked;
             });
+
+            // Event listener for the like button
+            // likeButton.addEventListener('click', () => {
+            //     // Increment the like count when the button is clicked
+            //     const currentCount = parseInt(likeCount.textContent);
+            //     likeCount.textContent = currentCount + 1;
+            // });
 
             // Create a container div for comments
             const commentContainer = document.createElement('div');
@@ -132,9 +189,13 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             commentInput.classList.add('comment-input');
 
             // Create a button to submit comments
-            const commentButton = document.createElement('button');
-            commentButton.textContent = 'Comment';
+            const commentButton = document.createElement('img');
+            commentButton.src = 'comment.png'; // Set the image source
+            commentButton.alt = 'Comment'; // Set the alt attribute
             commentButton.classList.add('comment-button'); // Add class for styling
+
+            commentButton.style.width = '35px';
+            commentButton.style.height = '35px';
 
             // Create a container for holding comments (both pre-made and newly made)
             const commentsBox = document.createElement('div');
@@ -200,12 +261,13 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             likeContainer.appendChild(likeButton);
             likeContainer.appendChild(likeCount);
             likeContainer.appendChild(commentContainer);
-            likeContainer.appendChild(commentsBox);
 
             // Append the image and text overlay to the container
             container.appendChild(img);
             container.appendChild(textOverlay);
             container.appendChild(likeContainer);
+            container.appendChild(commentsBox);
+
 
             // Append the container to the main container on the webpage
             const mainContainer = document.getElementById('loading-screen-container');
