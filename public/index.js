@@ -1,5 +1,5 @@
 // Your code here
-const apiKey = 'RGAPI-446641c0-1f80-4738-bb89-e50a7ba9bed1';
+const apiKey = 'RGAPI-e05593de-136d-4b30-8101-683cb8a07fbc';
 const baseUrl = 'https://na1.api.riotgames.com/lol';
 
 //display random loading screen skin splashes and names
@@ -22,6 +22,10 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 async function displayAllChampionSkinSplashArtsRandomOrder() {
@@ -94,9 +98,129 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             } else {
                 textOverlay.textContent = `${skinName}`; // Set the text content
             }
+
+            const likeContainer = document.createElement('div');
+            likeContainer.classList.add('like-container'); // Add a class to the like container
+
+            // Create a like button
+            const likeButton = document.createElement('button');
+            likeButton.textContent = 'Like';
+            likeButton.classList.add('like-button');
+
+            // Create a like count span
+            const likeCount = document.createElement('span');
+            // Generate a random like count between 1 and 500
+            const initialLikes = getRandomInt(1, 999);
+            likeCount.textContent = initialLikes;
+            likeCount.classList.add('like-count');
+
+            // Event listener for the like button
+            likeButton.addEventListener('click', () => {
+                // Increment the like count when the button is clicked
+                const currentCount = parseInt(likeCount.textContent);
+                likeCount.textContent = currentCount + 1;
+            });
+
+            // Create a container div for comments
+            const commentContainer = document.createElement('div');
+            commentContainer.classList.add('comment-container'); // Add a class to the comment container
+
+            // Create an input field for comments
+            const commentInput = document.createElement('input');
+            commentInput.type = 'text';
+            commentInput.placeholder = 'Add a comment';
+            commentInput.classList.add('comment-input');
+
+            // Create a button to submit comments
+            const commentButton = document.createElement('button');
+            commentButton.textContent = 'Comment';
+            commentButton.classList.add('comment-button'); // Add class for styling
+
+            // Create a container for holding comments (both pre-made and newly made)
+            const commentsBox = document.createElement('div');
+            commentsBox.classList.add('comments-box');
+            console.log(commentsBox)
+
+            async function fetchRandomUsername() {
+                try {
+                    const response = await fetch('https://randomuser.me/api/');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch random username');
+                    }
+                    const data = await response.json();
+                    const username = data.results[0].login.username;
+                    return username;
+                } catch (error) {
+                    console.error('Error fetching random username:', error);
+                }
+            }
+
+            async function fetchRandomComment() {
+                try {
+                    const response = await fetch('https://dummyjson.com/comments');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch random comment');
+                    }
+                    const data = await response.json();
+                    const comment = data[Math.floor(Math.random() * data.length)];
+                    return comment;
+                } catch (error) {
+                    console.error('Error fetching random comment:', error);
+                }
+            }
+
+            async function displayRandomComments(commentBox) {
+                try {
+                    const numComments = Math.floor(Math.random() * 11); // Random number of comments between 0 and 10
+                    for (let i = 0; i < numComments; i++) {
+                        const username = await fetchRandomUsername();
+                        const comment = await fetchRandomComment();
+                        const commentElement = document.createElement('div');
+                        commentElement.textContent = `${username}: ${comment}`;
+                        commentBox.appendChild(commentElement);
+                    }
+                } catch (error) {
+                    console.error('Error displaying random comments:', error);
+                }
+            }
+
+            // Usage
+            const commentBoxes = document.querySelectorAll('.comments-box');
+            commentBoxes.forEach(commentBox => displayRandomComments(commentBox));
+
+
+            // Event listener for the comment button
+            commentButton.addEventListener('click', () => {
+                // Get the value of the comment input
+                const commentText = commentInput.value;
+                if (commentText.trim() !== '') {
+                    // Create a new comment element
+                    const comment = document.createElement('div');
+                    comment.textContent = commentText;
+                    comment.classList.add('comment'); // Add class for styling
+
+                    // Append the comment to the comments box
+                    commentsBox.appendChild(comment);
+
+                    // Clear the comment input field
+                    commentInput.value = '';
+                }
+            });
+
+            // Append the input field and button to the comment container
+            commentContainer.appendChild(commentInput);
+            commentContainer.appendChild(commentButton);
+
+            // Append the like button, like count, and comment container to the like container
+            likeContainer.appendChild(likeButton);
+            likeContainer.appendChild(likeCount);
+            likeContainer.appendChild(commentContainer);
+            likeContainer.appendChild(commentsBox);
+
             // Append the image and text overlay to the container
             container.appendChild(img);
             container.appendChild(textOverlay);
+            container.appendChild(likeContainer);
 
             // Append the container to the main container on the webpage
             const mainContainer = document.getElementById('loading-screen-container');
@@ -108,123 +232,3 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
 }
 
 window.onload = displayAllChampionSkinSplashArtsRandomOrder;
-
-//Fetching skin names:
-// Function to fetch loading screen splash art for a specific champion skin
-// async function fetchLoadingScreenSplashArt(championName, skinIndex) {
-//     const baseUrl = 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/';
-
-//     try {
-//         // Fetch loading screen splash art for specified skin index
-//         const loadingScreenUrl = `${baseUrl}${championName}_${skinIndex}.jpg`;
-//         return loadingScreenUrl;
-//     } catch (error) {
-//         console.error('Error fetching loading screen splash art:', error);
-//     }
-// }
-
-// // Helper Function to shuffle an array
-// function shuffleArray(array) {
-//     for (let i = array.length - 1; i > 0; i--) {
-//         const j = Math.floor(Math.random() * (i + 1));
-//         [array[i], array[j]] = [array[j], array[i]];
-//     }
-//     return array;
-// }
-
-// // Function to display all champion skin splash arts on the webpage in a random order
-// async function displayAllChampionSkinSplashArtsRandomOrder() {
-//     try {
-//         const response = await fetch('https://ddragon.leagueoflegends.com/cdn/11.6.1/data/en_US/champion.json');
-//         if (!response.ok) {
-//             throw new Error('Failed to fetch champion data');
-//         }
-//         const data = await response.json();
-//         const allChampions = data.data;
-
-//         // console.log('All Champions:', allChampions);
-
-//         const allSkins = [];
-
-//         // Function to fetch data for a specific champion
-//         async function fetchChampionData(championName) {
-//             try {
-//                 const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/11.6.1/data/en_US/champion/${championName}.json`);
-//                 if (!response.ok) {
-//                     throw new Error(`Failed to fetch data for ${championName}`);
-//                 }
-//                 const data = await response.json();
-//                 return data.data[championName];
-//             } catch (error) {
-//                 console.error(`Error fetching data for ${championName}:`, error);
-//             }
-//         }
-
-//         // Iterate through each champion to get their skins
-//         for (const championName in allChampions) {
-//             const championData = await fetchChampionData(championName);
-//             if (championData.skins) {
-//                 const skins = championData.skins;
-
-//                 // Iterate through each skin and add it to the array of all skins
-//                 for (const skin of skins) {
-//                     allSkins.push({ championName, skinIndex: skin.num });
-//                 }
-//             }
-//         }
-//         // console.log('All Skins:', allSkins);
-
-//         // Shuffle the array of all skins
-//         const shuffledSkins = shuffleArray(allSkins);
-
-//         // Loop through each skin and display its splash art
-//         for (let i = 0; i < shuffledSkins.length; i++) {
-//             const { championName, skinIndex } = shuffledSkins[i];
-//             // console.log('Processing skin:', championName, skinIndex);
-//             const championData = allChampions[championName]; // Get champion data from the previously fetched data
-//             // console.log('All Champions:', allChampions);
-//             console.log('Champion Data for Aatrox:', allChampions['Aatrox']);
-
-//             if (championData && championData.skins && championData.skins.length >= skinIndex) {
-//                 const skin = championData.skins[skinIndex - 1]; // Skin index starts from 1, but array index starts from 0
-//                 const skinName = skin.name; // Get the actual skin name
-//                 // console.log(championName);
-//                 // console.log('Inside if statement');
-
-
-//                 const loadingScreenUrl = await fetchLoadingScreenSplashArt(championName, skinIndex);
-//                 // console.log('Loading screen URL:', loadingScreenUrl);
-
-//                 // Create a container div for the image and text overlay
-//                 const container = document.createElement('div');
-//                 container.classList.add('image-container'); // Add a class to the container
-
-//                 // Create an <img> element and set its attributes
-//                 const img = document.createElement('img');
-//                 img.src = loadingScreenUrl;
-//                 img.alt = `${championName} ${skinName}`; // Use the actual skin name
-//                 img.classList.add('splash'); // Add a class to the img element
-
-//                 // Create a text overlay div
-//                 const textOverlay = document.createElement('div');
-//                 textOverlay.classList.add('text-overlay'); // Add a class to the text overlay
-//                 textOverlay.textContent = `${championName} ${skinName}`; // Set the text content
-
-//                 // Append the image and text overlay to the container
-//                 container.appendChild(img);
-//                 container.appendChild(textOverlay);
-
-//                 // Append the container to the main container on the webpage
-//                 const mainContainer = document.getElementById('loading-screen-container');
-//                 mainContainer.appendChild(container);
-//             } else {
-//                 // console.log('Skipping skin:', championName, skinIndex);
-//             }
-//         }
-//     } catch (error) {
-//         console.error('Error displaying all champion skin splash arts:', error);
-//     }
-// }
-
-// // Call the function to display all champion skin splash arts in random order when the page loads
-// window.onload = displayAllChampionSkinSplashArtsRandomOrder;
