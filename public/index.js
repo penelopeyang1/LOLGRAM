@@ -2,6 +2,35 @@
 const apiKey = 'RGAPI-e05593de-136d-4b30-8101-683cb8a07fbc';
 const baseUrl = 'https://na1.api.riotgames.com/lol';
 
+// Function to create profile picture
+function createProfilePicture(username) {
+    // Create a container div for profile picture
+    const profileContainer = document.createElement('div');
+    profileContainer.classList.add('profile-container');
+
+    // Create a profile picture img element
+    const profileImg = document.createElement('img');
+    profileImg.src = 'profile-picture.jpg'; // Set the source of profile picture
+    profileImg.alt = 'Profile Picture'; // Set the alt attribute
+    profileImg.classList.add('profile-picture'); // Add class for styling
+
+    // Create a clickable username span element
+    const usernameSpan = document.createElement('span');
+    usernameSpan.textContent = username; // Set the username
+    usernameSpan.classList.add('username'); // Add class for styling
+    usernameSpan.addEventListener('click', () => {
+        // Redirect to champion profile page
+        window.location.href = `champion_profile.html?champion=${username}`;
+    });
+
+    // Append profile picture and username to profile container
+    profileContainer.appendChild(profileImg);
+    profileContainer.appendChild(usernameSpan);
+
+    return profileContainer;
+}
+
+
 //display random loading screen skin splashes and names
 async function fetchLoadingScreenSplashArt(championName, skinIndex) {
     const baseUrl = 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/';
@@ -14,6 +43,7 @@ async function fetchLoadingScreenSplashArt(championName, skinIndex) {
         console.error('Error fetching loading screen splash art:', error);
     }
 }
+
 
 // Helper Function to shuffle an array
 function shuffleArray(array) {
@@ -41,6 +71,7 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
         // Array to store all skins
         const allSkins = [];
 
+        console.log(allChampions);
         // Function to fetch data for a specific champion
         async function fetchChampionData(championName) {
             try {
@@ -77,6 +108,9 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
         // Loop through each skin and display its splash art
         for (const { championName, skinIndex, skinName } of shuffledSkins) {
             const loadingScreenUrl = await fetchLoadingScreenSplashArt(championName, skinIndex);
+
+            // Create profile picture and username
+            const profile = createProfilePicture(championName); // This is the new line to create the profile picture and username
 
             // Create a container div for the image and text overlay
             const container = document.createElement('div');
@@ -261,6 +295,9 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             likeContainer.appendChild(likeButton);
             likeContainer.appendChild(likeCount);
             likeContainer.appendChild(commentContainer);
+
+            // Append profile picture and username to container
+            container.appendChild(profile);
 
             // Append the image and text overlay to the container
             container.appendChild(img);
