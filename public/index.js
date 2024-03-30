@@ -11,7 +11,7 @@ function createProfilePicture(username) {
     // Create a profile picture img element
     const profileImg = document.createElement('img');
     profileImg.src = 'profile-picture.jpg'; // Set the source of profile picture
-    profileImg.alt = 'Profile Picture'; // Set the alt attribute
+    // profileImg.alt = 'Profile Picture'; // Set the alt attribute
     profileImg.classList.add('profile-picture'); // Add class for styling
 
     // Create a clickable username span element
