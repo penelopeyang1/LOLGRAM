@@ -30,6 +30,63 @@ function createProfilePicture(username) {
     return profileContainer;
 }
 
+// async function createProfilePicture(championName) {
+//     // Create a container div for profile picture
+//     const profileContainer = document.createElement('div');
+//     profileContainer.classList.add('profile-container');
+
+//     try {
+//         // Fetch champion square asset URL
+//         const squareAssetUrl = await fetchChampionSquareAsset(championName);
+//         if (squareAssetUrl) {
+//             // Create a profile picture img element
+//             const profileImg = document.createElement('img');
+//             profileImg.src = squareAssetUrl; // Set the source of profile picture
+//             profileImg.alt = `${championName} Profile Picture`; // Set the alt attribute
+//             profileImg.classList.add('profile-picture'); // Add class for styling
+
+//             // Create a clickable username span element
+//             const usernameSpan = document.createElement('span');
+//             usernameSpan.textContent = championName; // Set the username
+//             usernameSpan.classList.add('username'); // Add class for styling
+//             usernameSpan.addEventListener('click', () => {
+//                 // Redirect to champion profile page
+//                 window.location.href = `champion_profile.html?champion=${championName}`;
+//             });
+
+//             // Append profile picture and username to profile container
+//             profileContainer.appendChild(profileImg);
+//             profileContainer.appendChild(usernameSpan);
+
+//             return profileContainer;
+//         } else {
+//             throw new Error(`Square asset URL not found for ${championName}`);
+//         }
+//     } catch (error) {
+//         console.error(`Error creating profile picture for ${championName}:`, error);
+//         return null;
+//     }
+// }
+
+// async function fetchChampionSquareAsset(championName) {
+//     try {
+//         const response = await fetch(`${baseUrl}/data/en_US/champion/${championName}.json`);
+//         if (!response.ok) {
+//             throw new Error(`Failed to fetch data for ${championName}`);
+//         }
+//         const data = await response.json();
+//         const championData = data.data[championName];
+//         if (championData && championData.image && championData.image.square) {
+//             const squareAssetUrl = `${baseUrl}/img/champion/${championData.image.square}`;
+//             return squareAssetUrl;
+//         } else {
+//             throw new Error(`Square asset URL not found for ${championName}`);
+//         }
+//     } catch (error) {
+//         console.error(`Error fetching square asset for ${championName}:`, error);
+//         return null;
+//     }
+// }
 
 //display random loading screen skin splashes and names
 async function fetchLoadingScreenSplashArt(championName, skinIndex) {
