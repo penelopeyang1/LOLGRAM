@@ -3,32 +3,32 @@ const apiKey = 'RGAPI-e05593de-136d-4b30-8101-683cb8a07fbc';
 const baseUrl = 'https://na1.api.riotgames.com/lol';
 
 // Function to create profile picture
-function createProfilePicture(username) {
-    // Create a container div for profile picture
-    const profileContainer = document.createElement('div');
-    profileContainer.classList.add('profile-container');
+// function createProfilePicture(username) {
+//     // Create a container div for profile picture
+//     const profileContainer = document.createElement('div');
+//     profileContainer.classList.add('profile-container');
 
-    // Create a profile picture img element
-    const profileImg = document.createElement('img');
-    profileImg.src = 'profile-picture.jpg'; // Set the source of profile picture
-    // profileImg.alt = 'Profile Picture'; // Set the alt attribute
-    profileImg.classList.add('profile-picture'); // Add class for styling
+//     // Create a profile picture img element
+//     const profileImg = document.createElement('img');
+//     profileImg.src = 'profile-picture.jpg'; // Set the source of profile picture
+//     // profileImg.alt = 'Profile Picture'; // Set the alt attribute
+//     profileImg.classList.add('profile-picture'); // Add class for styling
 
-    // Create a clickable username span element
-    const usernameSpan = document.createElement('span');
-    usernameSpan.textContent = username; // Set the username
-    usernameSpan.classList.add('username'); // Add class for styling
-    usernameSpan.addEventListener('click', () => {
-        // Redirect to champion profile page
-        window.location.href = `champion_profile.html?champion=${username}`;
-    });
+//     // Create a clickable username span element
+//     const usernameSpan = document.createElement('span');
+//     usernameSpan.textContent = username; // Set the username
+//     usernameSpan.classList.add('username'); // Add class for styling
+//     usernameSpan.addEventListener('click', () => {
+//         // Redirect to champion profile page
+//         window.location.href = `champion_profile.html?champion=${username}`;
+//     });
 
-    // Append profile picture and username to profile container
-    profileContainer.appendChild(profileImg);
-    profileContainer.appendChild(usernameSpan);
+//     // Append profile picture and username to profile container
+//     profileContainer.appendChild(profileImg);
+//     profileContainer.appendChild(usernameSpan);
 
-    return profileContainer;
-}
+//     return profileContainer;
+// }
 
 // async function createProfilePicture(championName) {
 //     // Create a container div for profile picture
@@ -167,7 +167,7 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             const loadingScreenUrl = await fetchLoadingScreenSplashArt(championName, skinIndex);
 
             // Create profile picture and username
-            const profile = createProfilePicture(championName); // This is the new line to create the profile picture and username
+            // const profile = createProfilePicture(championName); // This is the new line to create the profile picture and username
 
             // Create a container div for the image and text overlay
             const container = document.createElement('div');
@@ -354,7 +354,7 @@ async function displayAllChampionSkinSplashArtsRandomOrder() {
             likeContainer.appendChild(commentContainer);
 
             // Append profile picture and username to container
-            container.appendChild(profile);
+            // container.appendChild(profile);
 
             // Append the image and text overlay to the container
             container.appendChild(img);
